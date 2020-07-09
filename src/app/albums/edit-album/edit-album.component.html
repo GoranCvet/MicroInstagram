@@ -1,0 +1,12 @@
+<form *ngIf="album"> 
+        <div class="form-group mt-2">
+            <label for="albumTitle" class="font-weight-bold">Album Title</label>
+            <input class="form-control" name="albumTitle" id="albumTitle" [(ngModel)]='album.title'>
+        </div>
+    
+        <div class="form-group">
+            <button class="btn btn-primary m-1" type="button" (click)="saveAlbum()">Save</button>
+            <button class="btn btn-primary m-1" type="button" (click)="clickBack()">Back</button>
+        </div>
+    
+</form>

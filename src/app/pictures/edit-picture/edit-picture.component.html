@@ -1,0 +1,43 @@
+<div class="card mt-3 bg-light" *ngIf='picture'>
+
+    <div class="card-header">
+        <h3 >Edit Picture</h3>
+    </div>
+
+    <div class="card-body">
+
+        <div class="form-group">
+            <label class="font-weight-bold">Picture Title</label>
+            <input class="form-control" [(ngModel)]="picture.title" >
+        </div>
+
+        <div class="form-group" hidden>
+            <label class="font-weight-bold">Picture Album</label>
+            <input class="form-control" [value]="picture.albumId" readonly >
+        </div>
+
+        
+        <div class="form-group">
+            <label for="album" class='font-weight-bold'>Select Album</label>
+            <select name="album" id="album" [(ngModel)]="picture.albumId" class="form-control">
+                <option *ngFor="let album of albums" [value]="album.id" [selected]="picture.albumId">
+                    {{album.title}}
+                </option>
+            </select>
+
+        </div>
+
+        <div class="text-center"> 
+            <img [src]='picture.url' 
+            [style.width.px]='picWidth'
+            [style.height.px]='picHeight'>
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary m-1" (click)="editPicture()">Save</button>
+        <button class="btn btn-primary m-1" (click)="clickBack()">Back</button>
+    </div>
+
+</div>

@@ -1,0 +1,44 @@
+
+<div class="input-group mt-3">
+    <input type="text" class="form-control" [(ngModel)]='listFilter' placeholder="Search Pictures">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Seacrh</button>
+    </div>
+</div>
+
+<div class="row card-group">
+
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor='let picture of paginator'>
+        <div class="card-body">
+
+            <img class="card-img-top rounded"
+                (click)="openModal(modal)"
+                [src]='picture.thumbnailUrl'
+                [style.width.px]='picWidth'
+                [style.height.px]='picHeight'
+                [title]='picture.title'
+            >
+            <ng-template #modal>
+                <div class="modal-content">
+                    <img [src]='picture.url'>
+                  </div>
+            </ng-template>
+
+
+            <div class="text-center form-group">
+                <a class="btn btn-primary" [routerLink]="['/pictures/details', picture.id]"> 
+                    Details
+                </a>
+                <a class="btn btn-primary m-2" [routerLink]="['/pictures/edit', picture.id]">
+                   Edit
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<jw-pagination [items]="filteredPictures" [pageSize]="20" (changePage)="onChangePage($event)"></jw-pagination>
+
