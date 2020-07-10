@@ -67,5 +67,19 @@ export class PictureService{
         })
     }
 
+    public uploadImage(image: File): Observable<IPictures> {
+        const formData = new FormData();
+    
+        formData.append('image', image);
+    
+        return this.http.post<IPictures>(this.baseUrl, image, {
+            headers: new HttpHeaders({
+                'Content-type': 'application/json'
+            })
+        }).pipe(
+            catchError(this.handleError)
+        );
+      }
+
 
 }

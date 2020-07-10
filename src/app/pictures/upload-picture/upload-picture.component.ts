@@ -26,7 +26,7 @@ export class UploadPictureComponent implements OnInit {
   albums: IAlbum[];
   errorMessage: string;
 
-  selectedFile = null;
+  selectedFile: File;
 
   constructor(private pictureService: PictureService,
     private albumService: AlbumService,
@@ -40,18 +40,17 @@ export class UploadPictureComponent implements OnInit {
       error: err => this.errorMessage = err
     })
   }
+
   onFileSelect(files){
     this.selectedFile = files[0].name;
     var reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
-
       this.picture.url = reader.result;
       this.picture.thumbnailUrl = reader.result; 
-
+    }
   }
-}
 
   getPicture(id: number){
     this.pictureService.getPicture(id).subscribe({
@@ -60,12 +59,10 @@ export class UploadPictureComponent implements OnInit {
   }
 
   uploadPicture() {
-    if(this.picture.id == null){
-      this.pictureService.uploadPicture(this.picture).subscribe({
+    this.pictureService.uploadPicture(this.picture).subscribe({
         next: picture => console.log(picture),
         error: err => console.log(err)
       });
-    }
     this.router.navigate(['/pictures']);
   }
 

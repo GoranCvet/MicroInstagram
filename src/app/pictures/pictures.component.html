@@ -20,7 +20,9 @@
             >
             <ng-template #modal>
                 <div class="modal-content">
-                    <img [src]='picture.url'>
+                    <img [src]='picture.url'
+                    [style.width.px]='600'
+                    [style.height.px]='600'>
                   </div>
             </ng-template>
 

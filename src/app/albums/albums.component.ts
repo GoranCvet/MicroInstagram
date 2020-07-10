@@ -15,6 +15,19 @@ export class AlbumsComponent implements OnInit {
   albums: IAlbum[];
   album: IAlbum;
   modalRef: BsModalRef;
+  filteredAlbums: IAlbum[];
+
+  _albumList: string;
+  public get albumList() : string {
+    return this._albumList;
+  }
+   
+  
+  public set albumList(value : string) {
+    this._albumList = value;
+    this.filteredAlbums = this.albumList ? this.filterList(this.albumList) : this.albums;
+  }
+  
 
   constructor(private albumService: AlbumService,
               private modalService: BsModalService, 
@@ -23,7 +36,10 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {
     this.albumService.getAlbums().subscribe(
       {
-        next: albums => this.albums = albums,
+        next: albums => {
+          this.albums = albums,
+          this.filteredAlbums = albums
+        },
         error: err => this.errorMessage = err
       });
   }
@@ -42,6 +58,11 @@ export class AlbumsComponent implements OnInit {
   
   openModal(modal: TemplateRef<IAlbum>){
     this.modalRef = this.modalService.show(modal);
+  }
+
+  filterList(serachTerm: string): IAlbum[] {
+    serachTerm = serachTerm.toLocaleLowerCase();
+    return this.albums.filter((picture: IAlbum) => picture.title.toLocaleLowerCase().indexOf(serachTerm) !== -1)
   }
 
 }

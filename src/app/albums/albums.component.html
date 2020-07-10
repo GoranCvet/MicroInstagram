@@ -1,8 +1,20 @@
+<div class="row">
+    <div class="col-sm-10">
+        <div class="input-group mt-3">
+            <input type="text" class="form-control" [(ngModel)]='albumList' placeholder="Search Album">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Seacrh</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <a class="btn  btn-primary mt-3" [routerLink]="['/album/edit']">Create Album</a>
+    </div>
+</div>
 
-<a class="btn  btn-primary mt-3" [routerLink]="['/album/edit']">Create Album</a>
 <div class="row card-group">
 
-    <div class="col-lg-4 col-md-6 col-sm-6 mt-3" *ngFor='let album of albums'>
+    <div class="col-lg-4 col-md-6 col-sm-6 mt-3" *ngFor='let album of filteredAlbums'>
 
         <div class="card-header font-weight-bold text-center">
             {{album.title}}
