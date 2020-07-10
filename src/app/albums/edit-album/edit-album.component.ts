@@ -37,7 +37,8 @@ export class EditAlbumComponent implements OnInit {
           this.album = album,
           console.log('Success'),
           console.log(album),
-          this.router.navigate(['/albums/', this.album.id])
+          // this.router.navigate(['/albums/', this.album.id])
+          this.router.navigate(['/albums'])
         },
         error: err => console.log(err)
       }
