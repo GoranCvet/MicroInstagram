@@ -21,13 +21,12 @@ export class EditPictureComponent implements OnInit {
     thumbnailUrl: null,
     url: null
   };
-  album: IAlbum = {
-    id: null,
-    pictures: [],
-    title: null,
-    userId: null
-  }
   albums: IAlbum[];
+
+  imagePath: string;
+  selectedFile: File;
+
+  toggleImage: boolean = false;
 
   constructor(private pictureService: PictureService,
               private albumService: AlbumService, 
@@ -52,26 +51,44 @@ export class EditPictureComponent implements OnInit {
       error: err => console.log(err),
     });
   }
-  getAlbum(id: number){
-    this.albumService.getAlbum(this.picture.albumId).subscribe({
-      next: album => this.album = album,
-      error: err => console.log(err)
-    });
-  }
 
   clickBack(){
     this.router.navigate(['/pictures']);
   }
   
   editPicture(){
-    this.pictureService.editPicture(this.picture).subscribe({
-      next: picture => {
-        console.log('Success'),
-        console.log(picture),
-        this.router.navigate(['/pictures/details/', this.picture.id])
-      },
-      error: err => console.log(err)
-    });
+    if(this.picture.id != null){
+      this.pictureService.editPicture(this.picture).subscribe({
+        next: picture => {
+          console.log('Success'),
+          console.log(picture),
+          this.router.navigate(['/pictures/details/', this.picture.id])
+        },
+        error: err => console.log(err)
+      });
+    }else{
+        this.pictureService.uploadPicture(this.picture).subscribe({
+            next: picture => console.log(picture),
+            error: err => console.log(err)
+          });
+        this.router.navigate(['/pictures']);
+    }
+  }
+
+  onFileSelect(files){
+    this.selectedFile = files[0].name;
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.picture.url = reader.result as string;
+      this.picture.thumbnailUrl = reader.result as string; 
+    }
+   
+  }
+
+  showHidePreview(){
+    this.toggleImage = !this.toggleImage;
   }
 
 

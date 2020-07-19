@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { IPictures } from './pictures';
 import { PictureService } from './pictures.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -9,7 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './pictures.component.html',
   styleUrls: ['./pictures.component.css']
 })
-export class PicturesComponent implements OnInit {
+export class PicturesComponent implements OnInit{
 
   errorMessage: string;
   picWidth: number = 200;
@@ -33,7 +33,7 @@ export class PicturesComponent implements OnInit {
 
   constructor(private pictureService: PictureService,
     private modalService: BsModalService) { }
-    
+  
   ngOnInit(): void {
     this.pictureService.getPictures().subscribe({
       next: pictures => {

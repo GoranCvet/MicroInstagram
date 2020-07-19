@@ -11,8 +11,8 @@ import { catchError, map } from 'rxjs/operators';
 
 export class AlbumService {
 
-    // baseUrl: string = 'http://localhost:3000/albums'; //local Json Server
-    baseUrl: string = 'https://jsonplaceholder.typicode.com/albums';
+    baseUrl: string = 'http://localhost:3000/albums'; //local Json Server
+    // baseUrl: string = 'https://jsonplaceholder.typicode.com/albums';
 
     constructor(private http: HttpClient){}
 

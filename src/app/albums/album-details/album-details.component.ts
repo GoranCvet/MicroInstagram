@@ -20,8 +20,6 @@ export class AlbumDetailsComponent implements OnInit {
     pictures: [],
     userId: null
   }
-
-  niza: any[];
   
   paginator: IPictures[];
 
@@ -32,7 +30,6 @@ export class AlbumDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.album.pictures = [];
 
     const parametar = this.route.snapshot.paramMap.get('id');
     if(parametar){

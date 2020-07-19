@@ -11,8 +11,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 export class PictureService{
 
-    // baseUrl: string = 'http://localhost:3000/pictures'; //local Json Server
-    baseUrl: string = 'https://jsonplaceholder.typicode.com/photos';
+    baseUrl: string = 'http://localhost:3000/pictures'; //local Json Server
+    // baseUrl: string = 'https://jsonplaceholder.typicode.com/photos';
     constructor(private http: HttpClient){
 
     }

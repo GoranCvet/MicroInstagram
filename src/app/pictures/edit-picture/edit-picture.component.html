@@ -1,34 +1,41 @@
+<form>
 <div class="card mt-3 bg-light" *ngIf='picture'>
 
     <div class="card-header">
-        <h3 >Edit Picture</h3>
+        <h3>{{picture.id ? 'Edit' : 'Upload'}} Picture</h3>
     </div>
 
     <div class="card-body">
 
         <div class="form-group">
             <label class="font-weight-bold">Picture Title</label>
-            <input class="form-control" [(ngModel)]="picture.title" >
+            <input class="form-control" name="title" [(ngModel)]="picture.title">
         </div>
-
-        <div class="form-group" hidden>
-            <label class="font-weight-bold">Picture Album</label>
-            <input class="form-control" [value]="picture.albumId" readonly >
-        </div>
-
         
         <div class="form-group">
             <label for="album" class='font-weight-bold'>Select Album</label>
             <select name="album" id="album" [(ngModel)]="picture.albumId" class="form-control">
-                <option *ngFor="let album of albums" [value]="album.id" [selected]="picture.albumId">
+                <option *ngFor="let album of albums" [value]="album.id">
                     {{album.title}}
                 </option>
             </select>
-
         </div>
 
+        <div class="form-group">
+            <label for="url" class='font-weight-bold'>{{picture.id ? 'Upload New' : 'Select '}} Picture</label>
+            <div class="custom-file">
+                <input id="url" type="file" accept='image/*' #file class="custom-file-input form-control" name="url"  
+                (change)="onFileSelect(file.files)" />
+                <label class="custom-file-label">{{selectedFile}}</label>
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf='picture.url'>
+            <button class="btn btn-primary"(click)="showHidePreview()">{{toggleImage ? 'Hide ' : 'Show '}} Preview</button>
+        </div>
         <div class="text-center"> 
-            <img [src]='picture.url' 
+            <img *ngIf='toggleImage'
+            [src]='picture.url' 
             [style.width.px]='picWidth'
             [style.height.px]='picHeight'>
         </div>
@@ -36,8 +43,9 @@
     </div>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary m-1" (click)="editPicture()">Save</button>
+        <button type="button" class="btn btn-primary m-1" (click)="editPicture()">Save</button>
         <button class="btn btn-primary m-1" (click)="clickBack()">Back</button>
     </div>
 
 </div>
+</form>

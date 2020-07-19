@@ -19,6 +19,7 @@ import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditAlbumComponent } from './albums/edit-album/edit-album.component';
+import { NavbarComponent } from './nav/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { EditAlbumComponent } from './albums/edit-album/edit-album.component';
     AlbumsComponent,
     AlbumDetailsComponent,
     EditAlbumComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { EditAlbumComponent } from './albums/edit-album/edit-album.component';
       {path: 'album/edit/:id', component: EditAlbumComponent},
       {path: 'pictures', component: PicturesComponent},
       {path: 'pictures/details/:id', component: PictureDetailsComponent},
-      {path: 'pictures/upload', component: UploadPictureComponent},
+      {path: 'pictures/upload', component: EditPictureComponent},
       {path: 'pictures/edit/:id', component: EditPictureComponent},
       {path: '',redirectTo: 'pictures', pathMatch: 'full'},
       {path: '**', redirectTo: 'pictures', pathMatch: 'full'}

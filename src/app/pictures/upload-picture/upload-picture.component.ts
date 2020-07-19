@@ -47,8 +47,8 @@ export class UploadPictureComponent implements OnInit {
     this.imagePath = files;
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
-      this.picture.url = reader.result;
-      this.picture.thumbnailUrl = reader.result; 
+      // this.picture.url = reader.result;
+      // this.picture.thumbnailUrl = reader.result; 
     }
   }
 
