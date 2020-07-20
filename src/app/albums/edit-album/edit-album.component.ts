@@ -37,8 +37,8 @@ export class EditAlbumComponent implements OnInit {
           this.album = album,
           console.log('Success'),
           console.log(album),
-          // this.router.navigate(['/albums/', this.album.id])
-          this.router.navigate(['/albums'])
+          this.router.navigate(['/albums/', album.id])
+          // this.router.navigate(['/albums'])
         },
         error: err => console.log(err)
       }
@@ -48,7 +48,9 @@ export class EditAlbumComponent implements OnInit {
             this.album = album,
             console.log('Successful update'),
             console.log(album)
-          }
+          this.router.navigate(['/albums'])
+          },
+          error: err => console.log(err)
         })
       }
   }

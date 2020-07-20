@@ -1,4 +1,4 @@
-<form>
+<form #form="ngForm">
 <div class="card mt-3 bg-light" *ngIf='picture'>
 
     <div class="card-header">
@@ -8,8 +8,10 @@
     <div class="card-body">
 
         <div class="form-group">
-            <label class="font-weight-bold">Picture Title</label>
-            <input class="form-control" name="title" [(ngModel)]="picture.title">
+            <label class="font-weight-bold">Picture Title*</label>
+            <em *ngIf="form.controls.title?.invalid && 
+                       (form.controls.title?.touched || mouseOverSave)">Requared</em>
+            <input class="form-control" name="title" required [(ngModel)]="picture.title">
         </div>
         
         <div class="form-group">
@@ -22,10 +24,11 @@
         </div>
 
         <div class="form-group">
-            <label for="url" class='font-weight-bold'>{{picture.id ? 'Upload New' : 'Select '}} Picture</label>
+            <label for="url" class='font-weight-bold'>{{picture.id ? 'Upload New' : 'Select '}} Picture*</label>
+            <em *ngIf="form.controls.url?.invalid && mouseOverSave">Requared</em>
             <div class="custom-file">
-                <input id="url" type="file" accept='image/*' #file class="custom-file-input form-control" name="url"  
-                (change)="onFileSelect(file.files)" />
+                <input id="url" type="file" accept='image/*' #file class="custom-file-input form-control" name="url" required
+                (change)="onFileSelect(file.files)" (ngModel)="picture.url"/>
                 <label class="custom-file-label">{{selectedFile}}</label>
             </div>
         </div>
@@ -43,7 +46,9 @@
     </div>
 
     <div class="card-footer">
-        <button type="button" class="btn btn-primary m-1" (click)="editPicture()">Save</button>
+        <span (mouseenter)="mouseOverSave=true" (mouseleave)="mouseOverSave=false">
+         <button type="submit" [disabled]="form.invalid" class="btn btn-primary m-1" (click)="editPicture()">Save</button>
+        </span>
         <button class="btn btn-primary m-1" (click)="clickBack()">Back</button>
     </div>
 

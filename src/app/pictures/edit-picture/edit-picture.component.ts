@@ -14,6 +14,8 @@ export class EditPictureComponent implements OnInit {
 
   picWidth: number = 600;
   picHeight: number = 600;
+  mouseOverSave: boolean;
+
   picture: IPictures = {
     id: null,
     albumId: null,
